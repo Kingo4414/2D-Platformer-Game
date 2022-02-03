@@ -156,7 +156,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2.13
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -164,7 +164,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &459297999 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7195464366672897874, guid: 2125f7c3d6fabe245a2bdc56e3e36812,
@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 459297999}
+  speed: 5
+  jump: 50
 --- !u!1 &1064328126
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +374,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1895675309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1104957447058308364, guid: 2125f7c3d6fabe245a2bdc56e3e36812,
+    type: 3}
+  m_PrefabInstance: {fileID: 3551803864986092277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1895675311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895675309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99deec50d7a0a645ace4e563faa2b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
 --- !u!1001 &3551803864986092277
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Jump");
-       
+        Debug.Log("Player jump " + jump);
         MoveCharacter(horizontal, vertical);
         PlayerMovemntAnimation(horizontal, vertical);
 
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         //MoveCharacter vertically
         if (vertical > 0) {
             rb2d.AddForce(new Vector2(0f,jump),ForceMode2D.Force);
+            Debug.Log("Player jump "+jump);
         }
 
     }
