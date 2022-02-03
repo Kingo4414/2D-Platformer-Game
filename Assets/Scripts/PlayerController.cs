@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,20 +16,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-       
+        float horizontal = Input.GetAxisRaw("Horizontal");
 
-        Crouch();
-
-        Jump();
-        Speed();
+        MoveCharacter(horizontal);
+        PlayerMovemntAnimation(horizontal);
 
 
        
 
     }
 
-    public void Crouch() {
+    private void MoveCharacter(float horizontal)
+    {
+        Vector3 position = transform.position;
+        position.x +=  horizontal * speed * Time.deltaTime;
+        transform.position = position;
+    }
+
+    private void Crouch() {
         bool crouch = Input.GetKey("left ctrl");
 
         if (crouch == true)
@@ -48,44 +54,48 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    public void Jump() {
-        animator.SetBool("Jump", false);
-        float jump = Input.GetAxisRaw("Vertical");
-        
+  
+    private void PlayerMovemntAnimation(float horizontal) {
+       
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
         Vector3 scale = transform.localScale;
-        if (jump > 0)
-        {
-            
-            animator.SetBool("Jump", true);
-           scale.x = -1f * Mathf.Abs(scale.x);
-            Debug.Log("jump >0 pressed..." +jump);
-            
-        }
-        else if (jump == 0)
-        { 
-            animator.SetBool("Jump", false);
-           scale.x = Mathf.Abs(scale.x);
-            Debug.Log("jump <0 pressed..." + jump);
-        }
-       // transform.localScale = scale;
-        
-    }
-    public void Speed() {
-        float speed = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("Speed", Mathf.Abs(speed));
-        Vector3 scale = transform.localScale;
-        if (speed < 0)
+        if (horizontal < 0)
         {
             scale.x = -1f * Mathf.Abs(scale.x);
         }
-        else if (speed > 0)
+        else if (horizontal > 0)
         {
             scale.x = Mathf.Abs(scale.x);
         }
         transform.localScale = scale;
 
-    }
+        Crouch();
+
+        animator.SetBool("Jump", false);
+        float jump = Input.GetAxisRaw("Vertical");
+
         
-        
-        
+        if (jump > 0)
+        {
+
+            animator.SetBool("Jump", true);
+            scale.x = -1f * Mathf.Abs(scale.x);
+            Debug.Log("jump >0 pressed..." + jump);
+
         }
+        else if (jump < 0)
+        {
+            animator.SetBool("Jump", false);
+            scale.x = Mathf.Abs(scale.x);
+            Debug.Log("jump <0 pressed..." + jump);
+        }
+        // transform.localScale = scale;
+
+        /*Input.GetAxisRaw("Vertical");
+        Input.GetKeyDown(KeyCode.Space);*/
+
+    }
+
+
+
+}
